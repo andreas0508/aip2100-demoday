@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AIP2100 — Demo Day 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #080808;
+      --surface: #111111;
+      --border: #222222;
+      --accent: #C8F135;
+      --accent-dim: #8aaa20;
+      --text: #F0EDE8;
+      --muted: #888888;
+      --danger: #FF4444;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      opacity: 0.04;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* ─── PASSWORD GATE ─── */
+    #gate {
+      position: fixed; inset: 0; z-index: 1000;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .gate-inner {
+      width: min(420px, 90vw);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .gate-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .gate-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 10vw, 5rem);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+    }
+
+    .gate-title span { color: var(--accent); }
+
+    .gate-sub {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .gate-divider {
+      height: 1px;
+      background: var(--border);
+    }
+
+    .input-row {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+
+    .input-row:focus-within {
+      border-color: var(--accent);
+    }
+
+    .input-row.error {
+      border-color: var(--danger);
+      animation: shake 0.4s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+    }
+
+    #pwd-input {
+      flex: 1;
+      background: var(--surface);
+      border: none;
+      outline: none;
+      padding: 0.9rem 1rem;
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+    }
+
+    #pwd-input::placeholder { color: #444; }
+
+    #pwd-btn {
+      background: var(--accent);
+      border: none;
+      padding: 0 1.2rem;
+      cursor: pointer;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      color: #080808;
+      text-transform: uppercase;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+
+    #pwd-btn:hover { background: #d4ff40; }
+
+    .error-msg {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--danger);
+      letter-spacing: 0.1em;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .error-msg.show { opacity: 1; }
+
+    /* ─── MAIN SITE ─── */
+    #site {
+      display: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(8,8,8,0.85);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-brand {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 5rem 3rem 4rem 3rem;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 2rem;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 12vw, 10rem);
+      line-height: 0.88;
+      letter-spacing: 0.01em;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-h1 .accent { color: var(--accent); }
+
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .hero-meta-item {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    .hero-meta-item strong { color: var(--text); font-weight: 400; }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 4rem 3rem;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #bbb;
+      max-width: 42ch;
+      margin-top: auto;
+    }
+
+    .hero-desc strong { color: var(--text); font-weight: 500; }
+
+    .hero-stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+
+    .hero-stat {
+      background: var(--bg);
+      padding: 1.5rem;
+    }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+
+    /* ─── TICKER ─── */
+    .ticker-wrap {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      padding: 0.8rem 0;
+      background: var(--surface);
+    }
+
+    .ticker-inner {
+      display: flex;
+      gap: 3rem;
+      width: max-content;
+      animation: ticker 25s linear infinite;
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .ticker-item {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .ticker-item span { color: var(--accent); }
+
+    /* ─── SECTION HEADER ─── */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      padding: 3rem 3rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+
+    /* ─── TEAMS / BRANSJER ─── */
+    .teams-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .team-card {
+      padding: 1.5rem 1.8rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.2s;
+      cursor: default;
+    }
+
+    .team-card:hover { background: var(--surface); }
+
+    .team-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .team-card:hover::after { width: 100%; }
+
+    .team-index {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      margin-bottom: 0.6rem;
+    }
+
+    .team-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .team-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.25rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.3rem;
+      line-height: 1.1;
+    }
+
+    .team-leader {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    .team-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-top: 0.4rem;
+    }
+
+    .team-tag {
+      display: inline-block;
+      margin-top: 0.8rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    @media (max-width: 1100px) {
+      .teams-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .teams-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ─── PROGRAM ─── */
+    .program-list {
+      padding: 0 3rem 4rem;
+    }
+
+    .program-item {
+      display: grid;
+      grid-template-columns: 120px 1fr auto;
+      align-items: start;
+      gap: 2rem;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .program-item:hover { background: rgba(255,255,255,0.015); margin: 0 -3rem; padding: 1.8rem 3rem; }
+
+    .program-time {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      padding-top: 0.2rem;
+    }
+
+    .program-name {
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 0.25rem;
+    }
+
+    .program-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    .program-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      align-self: center;
+      white-space: nowrap;
+    }
+
+    .program-badge.dim {
+      border-color: var(--border);
+      color: var(--muted);
+    }
+
+    /* ─── ABOUT ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-left {
+      padding: 4rem 3rem;
+      border-right: 1px solid var(--border);
+    }
+
+    .about-right {
+      padding: 4rem 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .about-body {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: #aaa;
+      max-width: 55ch;
+    }
+
+    .about-body strong { color: var(--text); font-weight: 500; }
+
+    .quote-block {
+      border-left: 2px solid var(--accent);
+      padding: 1rem 1.5rem;
+    }
+
+    .quote-text {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--text);
+      font-style: italic;
+      margin-bottom: 0.8rem;
+    }
+
+    .quote-author {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .criteria-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .criteria-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+
+    .criteria-item:hover { border-color: #333; }
+
+    .criteria-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--accent);
+      min-width: 2rem;
+      padding-top: 0.2rem;
+    }
+
+    .criteria-text {
+      font-size: 0.85rem;
+      color: #aaa;
+      line-height: 1.6;
+    }
+
+    .criteria-text strong { color: var(--text); font-weight: 500; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .footer-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      line-height: 0.9;
+      color: #1c1c1c;
+    }
+
+    .footer-info {
+      text-align: right;
+    }
+
+    .footer-info p {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      line-height: 2;
+    }
+
+    .footer-info a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.15s; }
+    .d3 { animation-delay: 0.25s; }
+    .d4 { animation-delay: 0.35s; }
+    .d5 { animation-delay: 0.45s; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 3rem 1.5rem 2rem; border-right: none; border-bottom: 1px solid var(--border); }
+      .hero-right { padding: 2rem 1.5rem; }
+      .hero-stat-grid { grid-template-columns: 1fr 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-left { border-right: none; border-bottom: 1px solid var(--border); }
+      .section-header { padding: 2rem 1.5rem 1.5rem; }
+      .program-list { padding: 0 1.5rem 3rem; }
+      .program-item { grid-template-columns: 90px 1fr; }
+      .program-badge { display: none; }
+      .footer-brand { font-size: 2.5rem; }
+      footer { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+      .footer-info { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── PASSWORD GATE ─── -->
+  <div id="gate">
+    <div class="gate-inner">
+      <div class="gate-label">Høyskolen Kristiania · 2026</div>
+      <h1 class="gate-title">DEMO<br><span>DAY</span></h1>
+      <p class="gate-sub">Dette er en lukket visning for inviterte bedriftsrepresentanter og deltakere i AIP2100.</p>
+      <div class="gate-divider"></div>
+      <div>
+        <div class="input-row" id="input-row">
+          <input type="password" id="pwd-input" placeholder="Skriv inn tilgangskode" autocomplete="off" />
+          <button id="pwd-btn" onclick="checkPwd()">Enter →</button>
+        </div>
+        <div class="error-msg" id="err-msg">Feil kode. Prøv igjen.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── MAIN SITE ─── -->
+  <div id="site">
+
+    <!-- NAV -->
+    <nav>
+      <span class="nav-brand">AIP2100 · Demo Day</span>
+      <ul class="nav-links">
+        <li><a href="#teams">Team</a></li>
+        <li><a href="#program">Program</a></li>
+        <li><a href="#om">Om faget</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left fade-in d1">
+        <div class="hero-eyebrow">AIP2100 — Høyskolen Kristiania</div>
+        <h1 class="hero-h1">DEMO<br><span class="accent">DAY</span><br>2026</h1>
+        <div class="hero-meta">
+          <div class="hero-meta-item"><strong>Dato:</strong> [SETT INN DATO]</div>
+          <div class="hero-meta-item"><strong>Sted:</strong> [SETT INN LOKALE], Oslo</div>
+          <div class="hero-meta-item"><strong>Fagansvarlig:</strong> Karl Philip Lund</div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div></div>
+        <div class="fade-in d2">
+          <p class="hero-desc">
+            Fem studentteam presenterer <strong>konkrete AI-funn</strong> fra sine bransjer — basert på over 15 intervjuer per team med fagpersoner, ledere og ansatte i norsk arbeidsliv.
+            <br><br>
+            Dette er ikke en skoleeksamen. Det er et konsulentoppdrag. Innsikten er ekte, prosessen var hard, og funnene skal tåle å møte folk fra bransjen.
+          </p>
+          <div class="hero-stat-grid fade-in d3">
+            <div class="hero-stat">
+              <div class="stat-num">22</div>
+              <div class="stat-label">Team</div>
+            </div>
+            <div class="hero-stat">
+              <div class="stat-num">330+</div>
+              <div class="stat-label">Intervjuer</div>
+            </div>
+            <div class="hero-stat">
+              <div class="stat-num">17</div>
+              <div class="stat-label">Uker</div>
+            </div>
+            <div class="hero-stat">
+              <div class="stat-num">22</div>
+              <div class="stat-label">Bransjer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TICKER -->
+    <div class="ticker-wrap">
+      <div class="ticker-inner">
+        <span class="ticker-item"><span>●</span> Demo Day 2026</span>
+        <span class="ticker-item">AI i norsk arbeidsliv</span>
+        <span class="ticker-item"><span>●</span> Høyskolen Kristiania</span>
+        <span class="ticker-item">AIP2100</span>
+        <span class="ticker-item"><span>●</span> Konkrete anbefalinger</span>
+        <span class="ticker-item">Fem bransjer</span>
+        <span class="ticker-item"><span>●</span> 75+ intervjuer</span>
+        <span class="ticker-item">Innsikt fra norsk arbeidsliv</span>
+        <!-- repeat for seamless loop -->
+        <span class="ticker-item"><span>●</span> Demo Day 2026</span>
+        <span class="ticker-item">AI i norsk arbeidsliv</span>
+        <span class="ticker-item"><span>●</span> Høyskolen Kristiania</span>
+        <span class="ticker-item">AIP2100</span>
+        <span class="ticker-item"><span>●</span> Konkrete anbefalinger</span>
+        <span class="ticker-item">Fem bransjer</span>
+        <span class="ticker-item"><span>●</span> 75+ intervjuer</span>
+        <span class="ticker-item">Innsikt fra norsk arbeidsliv</span>
+      </div>
+    </div>
+
+    <!-- TEAMS -->
+    <section id="teams">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2 class="section-title">Bransjene</h2>
+      </div>
+      <div class="teams-grid">
+
+        <div class="team-card">
+          <div class="team-index">Team 1</div>
+          <span class="team-icon">⚖️</span>
+          <div class="team-name">Juss</div>
+          <div class="team-leader">Dominic Guardian</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Team 2</div>
+          <span class="team-icon">💊</span>
+          <div class="team-name">E-helse</div>
+          <div class="team-leader">Peter Sagen</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Team 3</div>
+          <span class="team-icon">🏗️</span>
+          <div class="team-name">Eiendom/Bygg</div>
+          <div class="team-leader">Pia Westbye</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Team 4</div>
+          <span class="team-icon">🏛️</span>
+          <div class="team-name">Offentlig sektor</div>
+          <div class="team-leader">Christine Stocker</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Team 5</div>
+          <span class="team-icon">🏦</span>
+          <div class="team-name">Bank og forsikring</div>
+          <div class="team-leader">Tone Høimyr Folmo</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Team 6</div>
+          <span class="team-icon">🏥</span>
+          <div class="team-name">Helsesektor</div>
+          <div class="team-leader">Mikelis Steinblums</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Team 7</div>
+          <span class="team-icon">🧠</span>
+          <div class="team-name">Psykologi</div>
+          <div class="team-leader">Kine Strømmen Henriksen</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Team 10</div>
+          <span class="team-icon">👥</span>
+          <div class="team-name">HR</div>
+          <div class="team-leader">Synnøve Seeberg Nygaard</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Team 11</div>
+          <span class="team-icon">🔑</span>
+          <div class="team-name">Eiendomsmegling</div>
+          <div class="team-leader">Sakaria Sharrawe</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Team 12</div>
+          <span class="team-icon">📐</span>
+          <div class="team-name">Arkitektur</div>
+          <div class="team-leader">Sindre Friberg</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Team 13</div>
+          <span class="team-icon">🏨</span>
+          <div class="team-name">Hotell</div>
+          <div class="team-leader">Katrine Alderin</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Team 14</div>
+          <span class="team-icon">📣</span>
+          <div class="team-name">Markedsføring/PR</div>
+          <div class="team-leader">Erik-André Skauen Nilsen</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Team 15</div>
+          <span class="team-icon">📈</span>
+          <div class="team-name">Kapitalforvaltning</div>
+          <div class="team-leader">Steven Wong</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Team 16</div>
+          <span class="team-icon">🎓</span>
+          <div class="team-name">Læreryrket</div>
+          <div class="team-leader">Olav Berge</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Team 18</div>
+          <span class="team-icon">🔮</span>
+          <div class="team-name">Third Eye (konsulent/AI)</div>
+          <div class="team-leader">Filip Smolen</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Team 20</div>
+          <span class="team-icon">❤️</span>
+          <div class="team-name">Helse</div>
+          <div class="team-leader">William Østvik</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Team 21</div>
+          <span class="team-icon">🛡️</span>
+          <div class="team-name">Forsikring</div>
+          <div class="team-leader">Kris Sharma</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Team 23</div>
+          <span class="team-icon">🏠</span>
+          <div class="team-name">Eiendomsmegling (Hjemly)</div>
+          <div class="team-leader">Sander Petersen-Linås</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Team 24</div>
+          <span class="team-icon">🤝</span>
+          <div class="team-name">Kommunale helse/omsorg</div>
+          <div class="team-leader">Emma Trøan</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Team 26</div>
+          <span class="team-icon">💹</span>
+          <div class="team-name">Bank, Finans og Økonomi</div>
+          <div class="team-leader">Emil Trondsen</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Team 27</div>
+          <span class="team-icon">🧒</span>
+          <div class="team-name">Barnehage</div>
+          <div class="team-leader">Stella Echem</div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-index">Ukjent nr.</div>
+          <span class="team-icon">📢</span>
+          <div class="team-name">Markedsføringsbyråer</div>
+          <div class="team-leader">Inga Sundheim</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROGRAM -->
+    <section id="program">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2 class="section-title">Program</h2>
+      </div>
+      <div class="program-list">
+        <div class="program-item">
+          <div class="program-time">09:00</div>
+          <div>
+            <div class="program-name">Registrering og kaffe</div>
+            <div class="program-sub">Velkommen · Nettverking</div>
+          </div>
+          <div class="program-badge dim">Åpent</div>
+        </div>
+        <div class="program-item">
+          <div class="program-time">09:30</div>
+          <div>
+            <div class="program-name">Åpning og introduksjon</div>
+            <div class="program-sub">Karl Philip Lund, fagansvarlig AIP2100</div>
+          </div>
+          <div class="program-badge">Plenum</div>
+        </div>
+        <div class="program-item">
+          <div class="program-time">09:45</div>
+          <div>
+            <div class="program-name">Team 01 — Helsesektoren</div>
+            <div class="program-sub">Presentasjon + spørsmål</div>
+          </div>
+          <div class="program-badge">15 min</div>
+        </div>
+        <div class="program-item">
+          <div class="program-time">10:05</div>
+          <div>
+            <div class="program-name">Team 02 — [Bransje]</div>
+            <div class="program-sub">Presentasjon + spørsmål</div>
+          </div>
+          <div class="program-badge">15 min</div>
+        </div>
+        <div class="program-item">
+          <div class="program-time">10:25</div>
+          <div>
+            <div class="program-name">Team 03 — [Bransje]</div>
+            <div class="program-sub">Presentasjon + spørsmål</div>
+          </div>
+          <div class="program-badge">15 min</div>
+        </div>
+        <div class="program-item">
+          <div class="program-time">10:45</div>
+          <div>
+            <div class="program-name">Pause</div>
+            <div class="program-sub">Kaffe · Nettverking</div>
+          </div>
+          <div class="program-badge dim">10 min</div>
+        </div>
+        <div class="program-item">
+          <div class="program-time">10:55</div>
+          <div>
+            <div class="program-name">Team 04 — [Bransje]</div>
+            <div class="program-sub">Presentasjon + spørsmål</div>
+          </div>
+          <div class="program-badge">15 min</div>
+        </div>
+        <div class="program-item">
+          <div class="program-time">11:15</div>
+          <div>
+            <div class="program-name">Team 05 — [Bransje]</div>
+            <div class="program-sub">Presentasjon + spørsmål</div>
+          </div>
+          <div class="program-badge">15 min</div>
+        </div>
+        <div class="program-item">
+          <div class="program-time">11:35</div>
+          <div>
+            <div class="program-name">Panel og oppsummering</div>
+            <div class="program-sub">Bedriftsrepresentanter · Faglig diskusjon</div>
+          </div>
+          <div class="program-badge">Plenum</div>
+        </div>
+        <div class="program-item">
+          <div class="program-time">12:00</div>
+          <div>
+            <div class="program-name">Avslutning og nettverking</div>
+            <div class="program-sub">Lunsj · Uformell dialog</div>
+          </div>
+          <div class="program-badge dim">Åpent</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OM FAGET -->
+    <section id="om">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2 class="section-title">Om AIP2100</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-left">
+          <p class="about-body">
+            AIP2100 er et fag ved <strong>Høyskolen Kristiania</strong> der studentteam velger én bransje, lærer AI godt nok til å gi konkrete råd, og gjennomfører over 15 intervjuer med folk som faktisk jobber der.
+            <br><br>
+            Faget er inspirert av <strong>June Steensen</strong>, som sommeren 2025 intervjuet 15 norske toppledere om AI og presenterte funnene for McKinsey — som 19-åring.
+            <br><br>
+            Demo Day er ikke en skoleeksamen. Det er en presentasjon for folk fra arbeidslivet, og innsikten vurderes etter om den faktisk er nyttig for noen utenfor klasserommet.
+          </p>
+          <br><br>
+          <div class="quote-block">
+            <p class="quote-text">"June beviste at dette er mulig. AIP2100 systematiserer tilnærmingen hennes."</p>
+            <div class="quote-author">Karl Philip Lund · Fagansvarlig AIP2100</div>
+          </div>
+        </div>
+        <div class="about-right">
+          <div style="font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem;">Hva vurderes i dag</div>
+          <div class="criteria-list">
+            <div class="criteria-item">
+              <span class="criteria-num">01</span>
+              <div class="criteria-text"><strong>Innsiktens kvalitet</strong> — Er funnene interessante nok til at noen faktisk vil bruke tid på dem?</div>
+            </div>
+            <div class="criteria-item">
+              <span class="criteria-num">02</span>
+              <div class="criteria-text"><strong>Konkrete anbefalinger</strong> — Kan folk i bransjen bruke dette i hverdagen sin?</div>
+            </div>
+            <div class="criteria-item">
+              <span class="criteria-num">03</span>
+              <div class="criteria-text"><strong>Forståelse av AI</strong> — Ikke hype. Hva fungerer, hva misforstås, hva mangler?</div>
+            </div>
+            <div class="criteria-item">
+              <span class="criteria-num">04</span>
+              <div class="criteria-text"><strong>Presentasjonsevne</strong> — Tydelig, troverdig, og overbevisende for et faglig publikum.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-brand">AIP<br>2100</div>
+      <div class="footer-info">
+        <p>Høyskolen Kristiania · Oslo, Norge</p>
+        <p>Fagansvarlig: <a href="mailto:karl.philip.lund@kristiania.no">Karl Philip Lund</a></p>
+        <p style="margin-top:0.5rem; color: #333;">Demo Day 2026</p>
+      </div>
+    </footer>
+
+  </div><!-- /site -->
+
+  <script>
+    // ─── CHANGE THIS PASSWORD ───
+    const CORRECT_PASSWORD = "aip2100";
+
+    function checkPwd() {
+      const val = document.getElementById('pwd-input').value;
+      const row = document.getElementById('input-row');
+      const err = document.getElementById('err-msg');
+
+      if (val === CORRECT_PASSWORD) {
+        const gate = document.getElementById('gate');
+        gate.style.transition = 'opacity 0.5s ease';
+        gate.style.opacity = '0';
+        setTimeout(() => {
+          gate.style.display = 'none';
+          const site = document.getElementById('site');
+          site.style.display = 'block';
+          site.style.opacity = '0';
+          site.style.transition = 'opacity 0.5s ease';
+          requestAnimationFrame(() => { site.style.opacity = '1'; });
+        }, 500);
+      } else {
+        row.classList.add('error');
+        err.classList.add('show');
+        document.getElementById('pwd-input').value = '';
+        setTimeout(() => {
+          row.classList.remove('error');
+        }, 600);
+      }
+    }
+
+    document.getElementById('pwd-input').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') checkPwd();
+    });
+  </script>
+
+</body>
+</html>
