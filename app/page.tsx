@@ -1,5 +1,7 @@
 import { SignupForm } from "@/components/signup-form"
 
+// Demo Day 2026 - AI i praksis landing page
+
 export default function DemoDay() {
   return (
     <main className="min-h-screen bg-background flex flex-col items-center justify-center px-6 py-12">
