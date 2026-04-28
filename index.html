@@ -453,6 +453,63 @@
             object-fit: cover;
         }
 
+        /* Speaker Slider */
+        .speakers-slider-container {
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        .speakers-slider {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 1rem 0;
+        }
+
+        .speakers-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .speakers-slider .speaker-card {
+            flex: 0 0 220px;
+            min-width: 220px;
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .slider-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .slider-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .slider-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
         /* Tickets Section */
         .tickets-section {
             background: var(--bg-secondary);
@@ -907,87 +964,61 @@
         <p class="section-label">Foredragsholdere og konferansierer</p>
         <h2 class="section-title">Hvem står på scenen</h2>
         <p style="color: var(--text-secondary); margin-bottom: 1rem;">Foredragsholdere vil bli presentert fortløpende.</p>
-        <div class="speakers-grid">
-            <div class="speaker-card">
-                <div class="speaker-image">
-                    <!-- Bytt ut med: <img src="images/magne-ilsaas.jpg" alt="Magne Ilsaas"> -->
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="35" r="18" fill="#3a3f3a"/>
-                        <ellipse cx="50" cy="85" rx="30" ry="25" fill="#3a3f3a"/>
-                    </svg>
+        
+        <div class="speakers-slider-container">
+            <div class="speakers-slider" id="speakersSlider">
+                <div class="speaker-card">
+                    <div class="speaker-image">
+                        <img src="images/magne-ilsaas.png" alt="Magne Ilsaas">
+                    </div>
+                    <div class="speaker-name">Magne Ilsaas</div>
+                    <div class="speaker-role"></div>
                 </div>
-                <div class="speaker-name">Magne Ilsaas</div>
-                <div class="speaker-role"></div>
+                <div class="speaker-card">
+                    <div class="speaker-image">
+                        <img src="images/karl-phillip-lund.png" alt="Karl Phillip Lund">
+                    </div>
+                    <div class="speaker-name">Karl Phillip Lund</div>
+                    <div class="speaker-role"></div>
+                </div>
+                <div class="speaker-card">
+                    <div class="speaker-image">
+                        <img src="images/kristine-ostbye.png" alt="Kristine Østbye">
+                    </div>
+                    <div class="speaker-name">Kristine Østbye</div>
+                    <div class="speaker-role"></div>
+                </div>
+                <div class="speaker-card">
+                    <div class="speaker-image">
+                        <img src="images/mathilde-rebnord.png" alt="Mathilde Rebnord">
+                    </div>
+                    <div class="speaker-name">Mathilde Rebnord</div>
+                    <div class="speaker-role"></div>
+                </div>
+                <div class="speaker-card">
+                    <div class="speaker-image">
+                        <img src="images/inge-harkestad.png" alt="Inge Harkestad">
+                    </div>
+                    <div class="speaker-name">Inge Harkestad</div>
+                    <div class="speaker-role"></div>
+                </div>
             </div>
-            <div class="speaker-card">
-                <div class="speaker-image">
-                    <!-- Bytt ut med: <img src="images/fredrik-skauen.jpg" alt="Karl Phillip Lund"> -->
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="35" r="18" fill="#3a3f3a"/>
-                        <ellipse cx="50" cy="85" rx="30" ry="25" fill="#3a3f3a"/>
+            
+            <div class="slider-nav">
+                <button class="slider-btn" onclick="slideLeft()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>
-                </div>
-                <div class="speaker-name">Karl Phillip Lund</div>
-                <div class="speaker-role"></div>
-            </div>
-            <div class="speaker-card">
-                <div class="speaker-image">
-                    <!-- Bytt ut med: <img src="images/kristine-ostbye.jpg" alt="Kristine Østbye"> -->
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="35" r="18" fill="#3a3f3a"/>
-                        <ellipse cx="50" cy="85" rx="30" ry="25" fill="#3a3f3a"/>
+                </button>
+                <button class="slider-btn" onclick="slideRight()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
-                </div>
-                <div class="speaker-name">Kristine Østbye</div>
-                <div class="speaker-role"></div>
-            </div>
-            <div class="speaker-card">
-                <div class="speaker-image">
-                    <!-- Bytt ut med: <img src="images/tba.jpg" alt="TBA"> -->
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="35" r="18" fill="#3a3f3a"/>
-                        <ellipse cx="50" cy="85" rx="30" ry="25" fill="#3a3f3a"/>
-                    </svg>
-                </div>
-                <div class="speaker-name">TBA</div>
-                <div class="speaker-role"></div>
+                </button>
             </div>
         </div>
-    </section>
 
-    <!-- Tickets -->
-    <div class="tickets-section">
-        <div class="tickets-header">
-            <p class="section-label">Billetter</p>
-            <h2 class="section-title">Velg din billett</h2>
-        </div>
-        <div class="tickets-grid">
-            <div class="ticket-card">
-                <div class="ticket-type">AIP2100-studenter</div>
-                <div class="ticket-desc">Du er en del av AIP2100, AI i praksis. Denne dagen er for deg.</div>
-                <div class="ticket-price free">Gratis</div>
-                <div class="ticket-note">0 NOK</div>
-            </div>
-            <div class="ticket-card">
-                <div class="ticket-type">Student</div>
-                <div class="ticket-desc">For studenter fra andre klasser og skoler.</div>
-                <div class="ticket-price">100,-</div>
-                <div class="ticket-note">ekskl. mva.</div>
-            </div>
-            <div class="ticket-card">
-                <div class="ticket-type">Ansatte Kristiania</div>
-                <div class="ticket-desc">For deg som jobber ved Høyskolen Kristiania.</div>
-                <div class="ticket-price">199,-</div>
-                <div class="ticket-note">ekskl. mva.</div>
-            </div>
-            <div class="ticket-card">
-                <div class="ticket-type">Bedrifter</div>
-                <div class="ticket-desc">Møt fremtidens arbeidstakere og få innsikt i AI.</div>
-                <div class="ticket-price">599,-</div>
-                <div class="ticket-note">ekskl. mva.</div>
-            </div>
-        </div>
-        <div class="tickets-cta">
+        <div class="tickets-cta" style="margin-top: 3rem;">
             <a href="https://event.checkin.no/222792/ai-demo-day" target="_blank">
                 Reserver plass nå
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -995,7 +1026,7 @@
                 </svg>
             </a>
         </div>
-    </div>
+    </section>
 
     <!-- Footer -->
     <footer>
@@ -1009,6 +1040,18 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        function slideLeft() {
+            const slider = document.getElementById('speakersSlider');
+            slider.scrollBy({ left: -240, behavior: 'smooth' });
+        }
+
+        function slideRight() {
+            const slider = document.getElementById('speakersSlider');
+            slider.scrollBy({ left: 240, behavior: 'smooth' });
+        }
+    </script>
 
 </body>
 </html>
