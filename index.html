@@ -453,62 +453,24 @@
             object-fit: cover;
         }
 
-        /* Speaker Slider */
-        .speakers-slider-container {
-            position: relative;
+        /* Speaker Grid */
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
             margin-top: 2rem;
         }
 
-        .speakers-slider {
-            display: flex;
-            gap: 1rem;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            padding: 1rem 0;
-            justify-content: center;
+        @media (max-width: 900px) {
+            .speakers-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
-        .speakers-slider::-webkit-scrollbar {
-            display: none;
-        }
-
-        .speakers-slider .speaker-card {
-            flex: 0 0 160px;
-            min-width: 160px;
-        }
-
-        .slider-nav {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .slider-btn {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-
-        .slider-btn:hover {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: var(--bg-primary);
-        }
-
-        .slider-btn svg {
-            width: 24px;
-            height: 24px;
+        @media (max-width: 500px) {
+            .speakers-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Tickets Section */
@@ -966,63 +928,48 @@
         <h2 class="section-title">Hvem står på scenen</h2>
         <p style="color: var(--text-secondary); margin-bottom: 1rem;">Foredragsholdere vil bli presentert fortløpende.</p>
         
-        <div class="speakers-slider-container">
-            <div class="speakers-slider" id="speakersSlider">
-                <div class="speaker-card">
-                    <div class="speaker-image">
-                        <img src="images/magne-ilsaas.png" alt="Magne Ilsaas">
-                    </div>
-                    <div class="speaker-name">Magne Ilsaas</div>
-                    <div class="speaker-role"></div>
+        <div class="speakers-grid">
+            <div class="speaker-card">
+                <div class="speaker-image">
+                    <img src="images/magne-ilsaas.png" alt="Magne Ilsaas">
                 </div>
-                <div class="speaker-card">
-                    <div class="speaker-image">
-                        <img src="images/karl-phillip-lund.png" alt="Karl Phillip Lund">
-                    </div>
-                    <div class="speaker-name">Karl Phillip Lund</div>
-                    <div class="speaker-role"></div>
-                </div>
-                <div class="speaker-card">
-                    <div class="speaker-image">
-                        <img src="images/kristine-ostbye.png" alt="Kristine Østbye">
-                    </div>
-                    <div class="speaker-name">Kristine Østbye</div>
-                    <div class="speaker-role"></div>
-                </div>
-                <div class="speaker-card">
-                    <div class="speaker-image">
-                        <img src="images/vebjorn-sondersrod.png" alt="Vebjørn Søndersrød">
-                    </div>
-                    <div class="speaker-name">Vebjørn Søndersrød</div>
-                    <div class="speaker-role"></div>
-                </div>
-                <div class="speaker-card">
-                    <div class="speaker-image">
-                        <img src="images/mathilde-rebnord.png" alt="Mathilde Rebnord">
-                    </div>
-                    <div class="speaker-name">Mathilde Rebnord</div>
-                    <div class="speaker-role"></div>
-                </div>
-                <div class="speaker-card">
-                    <div class="speaker-image">
-                        <img src="images/inge-harkestad.png" alt="Inge Harkestad">
-                    </div>
-                    <div class="speaker-name">Inge Harkestad</div>
-                    <div class="speaker-role"></div>
-                </div>
+                <div class="speaker-name">Magne Ilsaas</div>
+                <div class="speaker-role"></div>
             </div>
-            
-            <div class="slider-nav">
-                <button class="slider-btn" onclick="slideLeft()">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
-                <button class="slider-btn" onclick="slideRight()">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
+            <div class="speaker-card">
+                <div class="speaker-image">
+                    <img src="images/karl-phillip-lund.png" alt="Karl Phillip Lund">
+                </div>
+                <div class="speaker-name">Karl Phillip Lund</div>
+                <div class="speaker-role"></div>
+            </div>
+            <div class="speaker-card">
+                <div class="speaker-image">
+                    <img src="images/kristine-ostbye.png" alt="Kristine Østbye">
+                </div>
+                <div class="speaker-name">Kristine Østbye</div>
+                <div class="speaker-role"></div>
+            </div>
+            <div class="speaker-card">
+                <div class="speaker-image">
+                    <img src="images/vebjorn-sondersrod.png" alt="Vebjørn Søndersrød">
+                </div>
+                <div class="speaker-name">Vebjørn Søndersrød</div>
+                <div class="speaker-role"></div>
+            </div>
+            <div class="speaker-card">
+                <div class="speaker-image">
+                    <img src="images/mathilde-rebnord.png" alt="Mathilde Rebnord">
+                </div>
+                <div class="speaker-name">Mathilde Rebnord</div>
+                <div class="speaker-role"></div>
+            </div>
+            <div class="speaker-card">
+                <div class="speaker-image">
+                    <img src="images/inge-harkestad.png" alt="Inge Harkestad">
+                </div>
+                <div class="speaker-name">Inge Harkestad</div>
+                <div class="speaker-role"></div>
             </div>
         </div>
 
@@ -1048,18 +995,6 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        function slideLeft() {
-            const slider = document.getElementById('speakersSlider');
-            slider.scrollBy({ left: -240, behavior: 'smooth' });
-        }
-
-        function slideRight() {
-            const slider = document.getElementById('speakersSlider');
-            slider.scrollBy({ left: 240, behavior: 'smooth' });
-        }
-    </script>
 
 </body>
 </html>
