@@ -251,9 +251,15 @@
 
         /* Sections */
         section {
-            padding: clamp(4rem, 10vh, 6rem) 2rem;
+            padding: clamp(3rem, 8vh, 6rem) 2rem;
             max-width: 1100px;
             margin: 0 auto;
+        }
+
+        @media (max-width: 500px) {
+            section {
+                padding: 2rem 1rem;
+            }
         }
 
         .section-label {
@@ -881,7 +887,7 @@
                 <div class="program-time">09:30</div>
                 <div class="program-details">
                     <h4>Velkommen</h4>
-                    <p>Introduksjon til dagen og AIP2100, AI i praksis</p>
+                    <p>Åpning ved rektor Trine Johansen Meza</p>
                 </div>
             </div>
             <div class="program-item">
@@ -931,6 +937,13 @@
         <div class="speakers-grid">
             <div class="speaker-card">
                 <div class="speaker-image">
+                    <img src="images/trine-johansen-meza.png" alt="Trine Johansen Meza">
+                </div>
+                <div class="speaker-name">Trine Johansen Meza</div>
+                <div class="speaker-role">Rektor</div>
+            </div>
+            <div class="speaker-card">
+                <div class="speaker-image">
                     <img src="images/magne-ilsaas.png" alt="Magne Ilsaas">
                 </div>
                 <div class="speaker-name">Magne Ilsaas</div>
@@ -973,7 +986,7 @@
             </div>
         </div>
 
-        <div class="tickets-cta" style="margin-top: 3rem;">
+        <div class="tickets-cta" style="margin-top: 2rem;">
             <a href="https://event.checkin.no/222792/ai-demo-day" target="_blank">
                 Reserver plass nå
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
