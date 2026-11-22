@@ -19,7 +19,7 @@
     body { margin: 0; color: var(--ink); background: var(--paper); }
     a { color: inherit; text-underline-offset: .25em; }
     a:focus-visible { outline: 3px solid #4878c1; outline-offset: 4px; }
-    .wrap { width: min(100% - clamp(1.5rem, 5vw, 5rem), 96rem); margin-inline: auto; }
+    .wrap { width: min(100% - clamp(1.25rem, 3.5vw, 5rem), 112rem); margin-inline: auto; }
     .top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .4rem 1rem; padding-block: .7rem; border-bottom: 1px solid var(--line); }
     .wordmark { font-weight: 800; text-decoration: none; letter-spacing: -.035em; }
     .hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(1.25rem, 3vw, 2.75rem); padding-block: clamp(1.1rem, 2.4vw, 2.25rem); }
@@ -41,13 +41,13 @@
     .assignment { margin: 0; padding: 0; list-style: none; counter-reset: step; }
     .assignment li { counter-increment: step; display: grid; grid-template-columns: 2rem 1fr; gap: .6rem; align-items: baseline; border-top: 1px solid #627383; padding: .65rem 0; }
     .assignment li::before { content: counter(step, decimal-leading-zero); color: var(--highlight); font-variant-numeric: tabular-nums; font-weight: 700; }
-    .visit { padding-block: clamp(1.1rem, 2.2vw, 2rem); border-top: 1px solid var(--line); }
+    .visit { padding-block: clamp(1rem, 1.8vw, 1.5rem) .85rem; border-top: 1px solid var(--line); }
     .visit-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr) minmax(0, .8fr); gap: 1.25rem clamp(1rem, 3vw, 2.5rem); }
     .visit-grid > div { border-top: 2px solid var(--ink); padding-top: .8rem; }
     .visit-grid h3 { margin-bottom: .3rem; font-size: 1.05rem; }
     .visit-grid p { margin-bottom: .6rem; color: var(--muted); }
-    .program-note { margin: .8rem 0 0; color: var(--muted); }
-    .bottom { border-top: 1px solid var(--line); border-bottom: 0; color: var(--muted); }
+    .program-note { margin: .55rem 0 0; color: var(--muted); }
+    .bottom { border-top: 1px solid var(--line); border-bottom: 0; color: var(--muted); padding-block: .55rem; }
     @media (max-width: 52rem) {
       .hero { grid-template-columns: 1fr; gap: 1rem; }
       .visit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
