@@ -5,61 +5,92 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="AI Demo Day med NLA Høgskolen &amp; Gokstad Akademiet. Se studentenes AI-prosjekter 9. desember 2026 i Storsalen i Oslo.">
   <title>AI Demo Day · NLA Høgskolen &amp; Gokstad Akademiet</title>
-  <link rel="stylesheet" href="../../style.css">
   <style>
-    .teaser .hero { padding-block: clamp(2rem, 5vw, 4rem); }
-    .teaser .project-story { padding-block: clamp(1.75rem, 4vw, 3rem); }
-    .visit-details { margin: 0; }
-    .visit-details div + div { margin-top: 1rem; }
-    .visit-details dt { font-weight: 700; color: var(--foreground); }
-    .visit-details dd { margin: .2rem 0 0; }
+    :root {
+      color-scheme: light;
+      --ink: #15283a;
+      --muted: #455768;
+      --paper: #f7f7f2;
+      --line: #c9d0d5;
+      --highlight: #e6f2a9;
+      font: 100%/1.55 system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: var(--paper); }
+    a { color: inherit; text-underline-offset: .25em; }
+    a:focus-visible { outline: 3px solid #4878c1; outline-offset: 4px; }
+    .wrap { width: min(100% - 3rem, 76rem); margin-inline: auto; }
+    .top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem 1rem; padding-block: 1rem; border-bottom: 1px solid var(--line); }
+    .wordmark { font-weight: 800; text-decoration: none; letter-spacing: -.035em; }
+    .hero { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; padding-block: clamp(2rem, 5vw, 4.5rem); }
+    .organizers { margin: 0 0 .8rem; font-weight: 700; font-size: .95rem; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: .65rem; font-size: clamp(2.8rem, 6.4vw, 6.1rem); line-height: .98; letter-spacing: -.07em; }
+    .lead { font: 400 clamp(1.3rem, 2.4vw, 2rem)/1.25 Georgia, serif; max-width: 23ch; margin-bottom: 1.4rem; }
+    .facts { display: flex; flex-wrap: wrap; column-gap: 1.5rem; }
+    .facts p { margin-bottom: 1rem; color: var(--muted); font-size: .94rem; }
+    .facts strong { color: var(--ink); }
+    .action { display: inline-block; background: var(--ink); color: white; padding: .8rem 1.05rem; border-radius: .25rem; font-weight: 750; text-decoration: none; }
+    .action span { font-size: .85rem; font-weight: 500; margin-left: .4rem; }
+    .action:hover { background: #304d66; }
+    .brief { background: var(--ink); color: var(--paper); padding: clamp(1.3rem, 3.2vw, 2.8rem); }
+    h2 { font-size: clamp(1.85rem, 4vw, 3.3rem); line-height: 1.06; letter-spacing: -.045em; margin-bottom: 1rem; }
+    .brief p { margin: 1rem 0 0; max-width: 42ch; color: #d4dfe8; }
+    .assignment { margin: 0; padding: 0; list-style: none; counter-reset: step; }
+    .assignment li { counter-increment: step; display: grid; grid-template-columns: 2rem 1fr; gap: .6rem; align-items: baseline; border-top: 1px solid #627383; padding: .65rem 0; }
+    .assignment li::before { content: counter(step, decimal-leading-zero); color: var(--highlight); font-variant-numeric: tabular-nums; font-weight: 700; }
+    .visit { padding-block: clamp(2.25rem, 5vw, 4rem); }
+    .visit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .visit-grid > div { border-top: 2px solid var(--ink); padding-top: .8rem; }
+    .visit-grid h3 { margin-bottom: .3rem; font-size: 1.05rem; }
+    .visit-grid p { margin-bottom: .6rem; color: var(--muted); }
+    .bottom { border-top: 1px solid var(--line); border-bottom: 0; color: var(--muted); }
+    @media (max-width: 48rem) {
+      .hero, .visit-grid { grid-template-columns: 1fr; }
+      .hero { gap: 1.5rem; }
+    }
+    @media (max-width: 30rem) {
+      .wrap { width: calc(100% - 2rem); }
+    }
   </style>
 </head>
-<body class="event-site teaser">
-  <header class="shell masthead">
-    <span class="brand">AI DEMO DAY</span>
+<body>
+  <header class="wrap top">
+    <a class="wordmark" href="#start">AI Demo Day</a>
     <nav aria-label="Hovedmeny"><a href="../../">Alle arrangementer</a></nav>
   </header>
-  <main class="shell">
-    <section class="hero" aria-labelledby="title">
-      <div class="hero-copy">
-        <p class="eyebrow">NLA Høgskolen &amp; Gokstad Akademiet</p>
-        <h1 id="title">AI Demo<span> Day</span></h1>
-        <p class="intro"><strong>Hva kan studentene bygge med AI på ett semester?</strong> På AI Demo Day viser studenter fra NLA Høgskolen &amp; Gokstad Akademiet hva de har bygget med AI. Se hvilke behov de tok tak i, og hvordan ideene ble til løsninger som kan prøves i praksis.</p>
+  <main id="start">
+    <section class="wrap hero" aria-labelledby="event-title">
+      <div>
+        <p class="organizers">NLA Høgskolen &amp; Gokstad Akademiet</p>
+        <h1 id="event-title">AI Demo Day</h1>
+        <p class="lead">Se hva studentene bygger når de får velge problemet selv.</p>
+        <div class="facts">
+          <p><strong><time datetime="2026-12-09">9. desember 2026</time></strong><br>09.00–17.00</p>
+          <p><strong>Storsalen menighet</strong><br>Kommandør T. I. Øgrims plass 4, Oslo</p>
+        </div>
+        <a class="action" href="https://event.checkin.no/234241">Meld deg på <span>via Checkin</span></a>
       </div>
-      <div class="event-facts">
-        <p><strong><time datetime="2026-12-09">Onsdag 9. desember 2026</time></strong><br>Kl. 09.00–17.00</p>
-        <p><strong>Storsalen menighet</strong><br>Kommandør T. I. Øgrims plass 4, Oslo</p>
-        <a class="button" href="https://event.checkin.no/234241">Meld deg på <span class="sr-only">via Checkin</span></a>
-      </div>
+      <aside class="brief" aria-labelledby="brief-title">
+        <h2 id="brief-title">Oppdraget studentene fikk</h2>
+        <ol class="assignment">
+          <li>Finn et problem dere har lyst til å løse.</li>
+          <li>Snakk gjerne med noen som opplever det.</li>
+          <li>Tenk gjennom hva dere kan lage og teste.</li>
+        </ol>
+        <p>Karl Philip Lund og Andreas Carlsen ga studentene oppdraget før felles kickoff.</p>
+      </aside>
     </section>
-    <section class="project-story" aria-labelledby="project-title">
-      <h2 id="project-title">Dette fikk studentene i oppgave</h2>
-      <div class="project-copy">
-        <p>Karl Philip Lund og Andreas Carlsen ga studentene et åpent oppdrag før felles kickoff: Finn et problem dere har lyst til å løse. Snakk gjerne med noen som opplever det. Tenk gjennom hva dere kan lage og teste.</p>
-        <p>På Demo Day får du se hva studentene har bygget med AI. Møt prosjektene med det samme spørsmålet studentene startet med: Hvem kan få nytte av dette, og hva må løsningen få til?</p>
-      </div>
-    </section>
-    <section class="project-story" aria-labelledby="visit-title">
-      <h2 id="visit-title">Hva får du ut av dagen?</h2>
-      <div class="project-copy">
-        <dl class="visit-details">
-          <div>
-            <dt>Se studentprosjektene</dt>
-            <dd>Se hvordan studentene har gått fra et konkret behov til noe de kan vise fram, og hvilke valg de tok da de brukte AI underveis.</dd>
-          </div>
-          <div>
-            <dt>Hør perspektiver fra inviterte gjester</dt>
-            <dd>Studentpresentasjonene suppleres med gjesteinnlegg. Dagen er relevant for deg som jobber i en bedrift, underviser eller studerer og vil se hvordan AI kan brukes i prosjektarbeid.</dd>
-          </div>
-          <div>
-            <dt>Finn riktig billett</dt>
-            <dd>Se billettvalg og priser for studenter, ansatte i utdanning og bedrifter i <a href="https://event.checkin.no/234241">Checkin</a>.</dd>
-          </div>
-        </dl>
+
+    <section class="wrap visit" aria-labelledby="visit-title">
+      <h2 id="visit-title">Dette får du se</h2>
+      <div class="visit-grid">
+        <div><h3>Studentprosjekter</h3><p>Se hva teamene har bygget med AI. Hør hvem de bygger for og hvilke valg de har tatt underveis.</p></div>
+        <div><h3>Gjesteinnlegg</h3><p>Inviterte gjester bidrar med egne perspektiver. Dagen er åpen for studenter, ansatte i utdanning og deltakere fra næringslivet.</p></div>
+        <div><h3>Billetter</h3><p>Billettvalg og priser finner du i Checkin.</p><a href="https://event.checkin.no/234241">Se billettene</a></div>
       </div>
     </section>
   </main>
-  <footer class="shell footer"><span>NLA Høgskolen &amp; Gokstad Akademiet</span><a href="../../">Se tidligere arrangementer</a></footer>
+  <footer class="wrap top bottom"><span>NLA Høgskolen &amp; Gokstad Akademiet</span><a href="../../">Tidligere arrangementer</a></footer>
 </body>
 </html>
