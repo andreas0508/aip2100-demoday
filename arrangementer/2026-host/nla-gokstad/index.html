@@ -75,15 +75,12 @@
     @media (max-width: 30rem) {
       .teaser .hero {
         display: flex;
-        min-height: calc(100svh - 3.25rem);
         flex-direction: column;
-        justify-content: space-between;
-        gap: .55rem;
+        gap: 1rem;
         text-align: left;
         padding-block: .5rem max(1rem, env(safe-area-inset-bottom));
       }
-      .teaser .hero > .event-info { display: contents; }
-      .teaser .hero :is(.organizers, h1, .lead, .facts, .booking-note) { margin: 0; }
+      .teaser .hero :is(.organizers, h1, .lead) { margin: 0; }
       .teaser .hero .organizers { margin-bottom: .4rem; }
       .teaser .hero h1 { margin-bottom: .55rem; }
       .teaser .details-layout h2 { margin-bottom: .65rem; }
