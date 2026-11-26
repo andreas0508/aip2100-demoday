@@ -28,6 +28,7 @@
     .teaser .facts { justify-content: center; gap: .75rem clamp(1.25rem, 3.5vw, 3rem); margin: 1rem 0 1.25rem; }
     .teaser .facts p { font-size: 1rem; }
     .teaser .hero .action { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding-inline: 1.3rem; }
+    .mobile-program { display: none; }
     .details-band { background: #232823; }
     .details-layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 1.6rem clamp(2rem, 5vw, 5rem); padding-block: clamp(1.35rem, 2.7vw, 2.5rem); }
     .details-layout h2 { font-size: clamp(1.35rem, 2.4vw, 2rem); margin-bottom: .7rem; }
@@ -57,15 +58,23 @@
       .teaser .hero {
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
+        gap: .65rem;
         min-height: calc(100svh - 61px);
         padding-block: clamp(.8rem, 3svh, 1.5rem) max(.85rem, env(safe-area-inset-bottom));
       }
-      .teaser .organizers { font-size: .82rem; margin-bottom: .75rem; }
-      .teaser .hero .lead { font-size: 1.05rem; line-height: 1.4; margin: .8rem auto; }
-      .teaser .event-info { display: flex; flex: 1; flex-direction: column; align-items: center; gap: 1rem; }
+      .teaser .organizers { font-size: .82rem; margin-bottom: 0; }
+      .teaser .hero .lead { font-size: 1.05rem; line-height: 1.4; margin: 0 auto; }
+      .teaser .hero-intro, .teaser .event-info { display: contents; }
+      .teaser .event-info .action { align-self: center; }
       .teaser .facts { gap: .5rem 1rem; margin: 0; }
       .teaser .facts p { font-size: .94rem; }
-      .teaser .hero .action { margin-top: auto; }
+      .mobile-program { display: block; margin: 0; max-width: 30ch; color: var(--muted); font-size: .94rem; }
+      .desktop-program { display: none; }
+    }
+    @media (max-width: 30rem) and (max-height: 33rem) {
+      .teaser .mobile-program { display: none; }
+      .teaser .desktop-program { display: block; }
     }
   </style>
 </head>
@@ -76,7 +85,7 @@
   </header>
   <main id="start">
     <section class="wrap hero" aria-labelledby="event-title">
-      <div>
+      <div class="hero-intro">
         <p class="organizers">NLA Høgskolen &amp; Gokstad Akademiet</p>
         <h1 id="event-title">AI Demo Day <span>2026</span></h1>
         <p class="lead">Fire uker på å løse konkrete problemer i næringslivet med KI. Se hva studentene bygger.</p>
@@ -86,6 +95,7 @@
           <p><strong><time datetime="2026-12-07">7. desember 2026</time></strong><br>Kl. <time datetime="12:00">12.00</time>–<time datetime="15:00">15.00</time></p>
           <p class="venue"><strong>Storsalen menighet</strong><br>Kommandør T. I. Øgrims plass 4, Oslo</p>
         </div>
+        <p class="mobile-program">Studentpresentasjoner og innlegg fra inviterte gjester. Mer programinfo kommer.</p>
         <a class="action" href="https://event.checkin.no/234241">Meld deg på via Checkin</a>
       </div>
     </section>
@@ -101,7 +111,7 @@
           </ol>
           <p>Karl Philip Lund og Andreas Carlsen ga studentene oppdraget før felles kickoff.</p>
           <p>Prosjektideene spenner fra et KI-kurs om svindel til skrivehjelp og et 3D-kart for renholdere.</p>
-        <p>På Demo Day viser studentene fram prosjektene sine. Det blir også innlegg fra inviterte gjester. Mer programinfo kommer.</p>
+        <p class="desktop-program">På Demo Day viser studentene fram prosjektene sine. Det blir også innlegg fra inviterte gjester. Mer programinfo kommer.</p>
         </section>
 
         <section class="media" aria-labelledby="media-title">
