@@ -34,6 +34,8 @@
     .media-links a { display: block; padding-block: .2rem; color: var(--ink); }
     .media-links small { display: block; color: var(--muted); font-size: .9rem; }
     @media (min-width: 56rem) {
+      .teaser { min-height: 100svh; display: flex; flex-direction: column; }
+      .teaser main { flex: 1; display: flex; flex-direction: column; }
       .teaser .wrap { width: min(calc(100% - clamp(2rem, 5vw, 6rem)), 112rem); }
       .teaser .top { min-height: 3.75rem; }
       .teaser .hero, .details-layout {
@@ -43,30 +45,34 @@
       .teaser .hero {
         display: grid;
         align-items: center;
-        padding-block: clamp(1.3rem, 2.2vw, 2.6rem) clamp(1.4rem, 2.4vw, 2.75rem);
+        padding-block: 1.15rem clamp(1.4rem, 2.4vw, 2.75rem);
         text-align: left;
       }
       .teaser .organizers { margin-bottom: 1rem; }
-      .teaser .hero h1 { font-size: clamp(3.75rem, 6.8vw, 7.5rem); margin-bottom: 1rem; }
-      .teaser .lead { margin: 0; max-width: 39ch; }
+      .teaser .hero h1 { font-size: clamp(3.75rem, 6.8vw, 8.5rem); margin-bottom: 1rem; }
+      .teaser .lead { margin: 0; max-width: 39ch; font-size: clamp(1.35rem, 1.65vw, 2rem); }
       .event-info { background: #232823; padding: clamp(1rem, 2vw, 1.5rem); border-radius: .5rem; }
       .teaser .facts { display: flex; gap: .65rem 1.25rem; justify-content: start; }
       .teaser .facts p { font-size: 1rem; }
-      .details-layout { padding-block: clamp(1.25rem, 1.8vw, 2rem); }
+      .details-band { flex: 1; display: grid; align-items: center; }
+      .details-layout { padding-block: clamp(1.25rem, 2.3vw, 2.5rem); }
+      .details-layout h2 { font-size: clamp(1.5rem, 2.35vw, 2.75rem); }
+      .details-layout .assignment, .details-layout .brief p, .media-links { font-size: clamp(1rem, 1.1vw, 1.25rem); }
       .details-layout .media { padding-inline: clamp(1rem, 2vw, 1.5rem); }
       .details-layout .brief p { max-width: 62ch; }
       .media-links li + li { margin-top: 0; }
       .media-links li { border-top: 1px solid var(--line); }
       .media-links li:last-child { border-bottom: 1px solid var(--line); }
-      .media-links a { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .15rem .75rem; padding: .65rem 0; text-decoration: none; }
-      .media-links a:hover span, .media-links a:focus-visible span { text-decoration: underline; }
-      .media-links small { white-space: nowrap; }
+      .media-links a { padding: clamp(.65rem, .9vw, 1rem) 0; text-decoration: none; }
+      .media-links a > span { text-decoration: underline; text-decoration-color: var(--muted); }
+      .media-links small { margin-top: .15rem; }
+      .teaser .bottom { min-height: 3.5rem; }
     }
     @media (max-width: 48rem) {
       .details-layout { grid-template-columns: 1fr; gap: 1rem; padding-block: 1.15rem; }
     }
     @media (max-width: 30rem) {
-      .teaser .hero { text-align: left; padding-block: 1rem 1.25rem; }
+      .teaser .hero { text-align: left; padding-block: .55rem 1rem; }
       .teaser .organizers { margin-bottom: .55rem; }
       .teaser .details-layout h2 { margin-bottom: .65rem; }
       .teaser .hero .lead { margin-inline: 0; }
@@ -110,14 +116,15 @@
           </ol>
           <p>Karl Philip Lund og Andreas Carlsen ga studentene oppdraget før felles kickoff.</p>
           <p>Prosjektideene spenner fra et KI-kurs om svindel til skrivehjelp og et 3D-kart for renholdere.</p>
+        <p>På Demo Day viser studentene fram prosjektene sine. Det blir også innlegg fra inviterte gjester.</p>
         </section>
 
         <section class="media" aria-labelledby="media-title">
           <h2 id="media-title">Presse og video</h2>
           <ul class="media-links">
-            <li><a href="https://www.kom24.no/ai-aleksander-stensby-artificial-intelligence/dette-laerte-de-av-ki-eksperten-en-oyeapner/970719"><span>Studentene om KI-workshopen</span><small>KOM24</small></a></li>
-            <li><a href="https://www.vikebladet.no/nyhende/n/ARd1X5/sofie-fraa-hareid-lagar-julebok-til-inntekt-for-frelsesarmeen"><span>Julebok til inntekt for Frelsesarmeen</span><small>Vikebladet</small></a></li>
-            <li><a href="https://www.linkedin.com/feed/update/urn:li:activity:7460965979779403776/"><span>Videohilsen fra Nicolai Tangen til studenter</span><small>Våren 2026</small></a></li>
+          <li><a href="https://www.kom24.no/ai-aleksander-stensby-artificial-intelligence/dette-laerte-de-av-ki-eksperten-en-oyeapner/970719"><span>Studentene om KI-workshopen</span><small>KOM24 · Erfaringer fra en heldag med Claude og markedsføring</small></a></li>
+          <li><a href="https://www.vikebladet.no/nyhende/n/ARd1X5/sofie-fraa-hareid-lagar-julebok-til-inntekt-for-frelsesarmeen"><span>Julebok til inntekt for Frelsesarmeen</span><small>Vikebladet · Studentenes bok med juleoppskrifter</small></a></li>
+          <li><a href="https://www.linkedin.com/feed/update/urn:li:activity:7460965979779403776/"><span>Videohilsen fra Nicolai Tangen til studenter</span><small>Våren 2026 · Om hvordan virksomheter tar i bruk KI</small></a></li>
           </ul>
         </section>
       </div>
