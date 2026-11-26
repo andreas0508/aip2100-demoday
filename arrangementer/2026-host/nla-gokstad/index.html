@@ -5,40 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="AI Demo Day med NLA Høgskolen &amp; Gokstad Akademiet. Se studentenes AI-prosjekter 7. desember 2026 i Storsalen i Oslo.">
   <title>AI Demo Day · NLA Høgskolen &amp; Gokstad Akademiet</title>
-  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="/arrangementer/style.css">
   <style>
+    .teaser .wrap { width: min(calc(100% - 2rem), 74rem); }
     .teaser .top { border: 0; }
+    .teaser .hero {
+      display: block;
+      text-align: center;
+      padding-block: clamp(1.75rem, 5vw, 4.75rem) clamp(1.75rem, 4vw, 3.5rem);
+    }
     .teaser .organizers { color: var(--muted); }
-    .teaser .brief { background: #202420; border: 0; border-radius: .5rem; }
-    .teaser .brief h2, .teaser .media h2 { font-size: clamp(1.35rem, 2.3vw, 2rem); }
-    .teaser .assignment li::marker { color: var(--muted); }
-    .teaser .media { border: 0; }
-    .media-links { margin: 0; padding-left: 1.25rem; }
-    .media-links li { padding-block: .2rem; }
-    .teaser .media-links a { color: var(--ink); }
-    @media (min-width: 64rem) {
-      .teaser .wrap { width: min(100% - 4rem, 86rem); }
-      .teaser .hero { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(2rem, 4.5vw, 4.75rem); padding-block: 2rem 1.5rem; }
-      .teaser .lead { max-width: 36ch; }
-      .teaser .brief { justify-content: center; padding: clamp(1.4rem, 3vw, 2.5rem); }
-      .teaser .brief p { max-width: 52ch; }
-      .teaser .media { padding-block: 1.25rem; }
-      .media-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; padding-left: 0; list-style: none; }
-      .media-links li { padding: .65rem 0; }
-      .media-links a { display: block; font-weight: 600; }
+    .teaser .hero h1 { font-size: clamp(2.7rem, 7vw, 6.75rem); }
+    .teaser .lead { max-width: 44ch; margin-inline: auto; }
+    .teaser .facts { justify-content: center; }
+    .teaser .action { display: inline-block; }
+    .details-band { background: #232823; }
+    .details-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 1.75rem clamp(2rem, 6vw, 6rem);
+      padding-block: clamp(1.4rem, 3.2vw, 2.8rem);
+    }
+    .details-layout h2 { font-size: clamp(1.35rem, 2.3vw, 2rem); }
+    .details-layout .brief { display: block; background: none; border: 0; padding: 0; }
+    .details-layout .media { padding: 0; border: 0; }
+    .media-links { margin: 0; padding: 0; list-style: none; }
+    .media-links li + li { margin-top: .55rem; }
+    .media-links a { display: block; padding-block: .2rem; color: var(--ink); }
+    .media-links small { display: block; color: var(--muted); font-size: .9rem; }
+    @media (max-width: 48rem) {
+      .details-layout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 30rem) {
+      .teaser .hero { text-align: left; }
+      .teaser .hero .lead { margin-inline: 0; }
+      .teaser .facts { justify-content: start; }
+      .teaser .action { display: block; }
     }
   </style>
 </head>
 <body class="teaser">
   <header class="wrap top">
     <a class="wordmark" href="#start">AI Demo Day</a>
-    <nav aria-label="Hovedmeny"><a href="../../">Alle arrangementer</a></nav>
+    <nav aria-label="Hovedmeny"><a href="/arrangementer/">Alle arrangementer</a></nav>
   </header>
   <main id="start">
     <section class="wrap hero" aria-labelledby="event-title">
       <div>
         <p class="organizers">NLA Høgskolen &amp; Gokstad Akademiet</p>
-        <h1 id="event-title">AI Demo Day</h1>
+        <h1 id="event-title">AI Demo <span>Day</span></h1>
         <p class="lead">Fire uker på å løse konkrete problemer i næringslivet med KI. Se hva studentene bygger.</p>
         <div class="facts">
           <p><strong><time datetime="2026-12-07T12:00:00+01:00">7. desember 2026</time></strong><br>Kl. 12.00–15.00</p>
@@ -47,27 +62,32 @@
         <a class="action" href="https://event.checkin.no/234241">Meld deg på <span>via Checkin</span></a>
         <p class="booking-note">Sikre deg billett i god tid. Mer programinfo kommer.</p>
       </div>
-      <aside class="brief" aria-labelledby="brief-title">
-        <h2 id="brief-title">Oppdraget studentene fikk</h2>
-        <ol class="assignment">
-          <li>Finn et problem dere har lyst til å løse.</li>
-          <li>Snakk gjerne med noen som opplever det.</li>
-          <li>Bygg en løsning som løser problemet, og test den med dem den er laget for.</li>
-        </ol>
-        <p>Karl Philip Lund og Andreas Carlsen ga studentene oppdraget før felles kickoff.</p>
-        <p>Prosjektideene spenner fra et KI-kurs om svindel til skrivehjelp og et 3D-kart for renholdere.</p>
-      </aside>
     </section>
 
-    <section class="wrap visit media" aria-labelledby="media-title">
-      <h2 id="media-title">Presse og video</h2>
-      <ul class="media-links">
-        <li><a href="https://www.kom24.no/ai-aleksander-stensby-artificial-intelligence/dette-laerte-de-av-ki-eksperten-en-oyeapner/970719">Studentene om KI-workshopen</a> · KOM24</li>
-        <li><a href="https://www.vikebladet.no/nyhende/n/ARd1X5/sofie-fraa-hareid-lagar-julebok-til-inntekt-for-frelsesarmeen">Julebok til inntekt for Frelsesarmeen</a> · Vikebladet</li>
-        <li><a href="https://www.linkedin.com/feed/update/urn:li:activity:7460965979779403776/">Videohilsen fra Nicolai Tangen til studenter</a> · Våren 2026</li>
-      </ul>
-    </section>
+    <div class="details-band">
+      <div class="wrap details-layout">
+        <section class="brief" aria-labelledby="brief-title">
+          <h2 id="brief-title">Oppdraget studentene fikk</h2>
+          <ol class="assignment">
+            <li>Finn et problem dere har lyst til å løse.</li>
+            <li>Snakk gjerne med noen som opplever det.</li>
+            <li>Bygg en løsning som løser problemet, og test den med dem den er laget for.</li>
+          </ol>
+          <p>Karl Philip Lund og Andreas Carlsen ga studentene oppdraget før felles kickoff.</p>
+          <p>Prosjektideene spenner fra et KI-kurs om svindel til skrivehjelp og et 3D-kart for renholdere.</p>
+        </section>
+
+        <section class="media" aria-labelledby="media-title">
+          <h2 id="media-title">Presse og video</h2>
+          <ul class="media-links">
+            <li><a href="https://www.kom24.no/ai-aleksander-stensby-artificial-intelligence/dette-laerte-de-av-ki-eksperten-en-oyeapner/970719">Studentene om KI-workshopen<small>KOM24</small></a></li>
+            <li><a href="https://www.vikebladet.no/nyhende/n/ARd1X5/sofie-fraa-hareid-lagar-julebok-til-inntekt-for-frelsesarmeen">Julebok til inntekt for Frelsesarmeen<small>Vikebladet</small></a></li>
+            <li><a href="https://www.linkedin.com/feed/update/urn:li:activity:7460965979779403776/">Videohilsen fra Nicolai Tangen til studenter<small>Våren 2026</small></a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
   </main>
-  <footer class="wrap top bottom"><span>NLA Høgskolen &amp; Gokstad Akademiet</span><a href="../../">Tidligere arrangementer</a></footer>
+  <footer class="wrap top bottom"><span>NLA Høgskolen &amp; Gokstad Akademiet</span><a href="/arrangementer/">Tidligere arrangementer</a></footer>
 </body>
 </html>
