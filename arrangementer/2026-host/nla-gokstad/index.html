@@ -43,7 +43,9 @@
     @media (min-width: 56rem) {
       .teaser { min-height: 100svh; display: flex; flex-direction: column; }
       .teaser main { flex: 1; display: flex; flex-direction: column; }
-      .teaser .hero { display: grid; grid-template-columns: minmax(0, 1fr); align-content: center; gap: 0; min-height: min(64svh, 43rem); }
+      .teaser .hero { padding-block: clamp(1.6rem, 2.4vw, 2.8rem); }
+      .teaser .hero h1 { font-size: clamp(3.5rem, 6vw, 6rem); }
+      .teaser .hero h1 span { font-size: .78em; margin-top: .1em; }
       .teaser .facts { align-items: baseline; }
       .details-band { flex: 1; display: grid; align-items: center; }
     }
@@ -55,7 +57,8 @@
       .teaser .hero { padding-block: 1rem 1.25rem; }
       .teaser .organizers { font-size: .82rem; margin-bottom: .75rem; }
       .teaser .hero .lead { font-size: 1.05rem; line-height: 1.4; margin: .8rem auto; }
-      .teaser .facts { display: grid; gap: .3rem; margin: .8rem 0 1rem; }
+      .teaser .facts { display: flex; flex-wrap: wrap; gap: .35rem .75rem; margin: .8rem 0 1rem; }
+      .teaser .facts .venue { flex-basis: 100%; }
       .teaser .facts p { font-size: .94rem; }
     }
   </style>
@@ -76,7 +79,7 @@
         <div class="facts">
           <p><strong><time datetime="2026-12-07">7. desember 2026</time></strong></p>
           <p>Kl. <time datetime="12:00">12.00</time>–<time datetime="15:00">15.00</time></p>
-          <p><strong>Storsalen menighet</strong><br>Kommandør T. I. Øgrims plass 4, Oslo</p>
+          <p class="venue"><strong>Storsalen menighet</strong><br>Kommandør T. I. Øgrims plass 4, Oslo</p>
         </div>
         <a class="action" href="https://event.checkin.no/234241">Meld deg på via Checkin</a>
       </div>
