@@ -51,9 +51,10 @@
       .teaser .organizers { margin-bottom: 1rem; }
       .teaser .hero h1 { font-size: clamp(3.75rem, 6.8vw, 8.5rem); margin-bottom: 1rem; }
       .teaser .lead { margin: 0; max-width: 39ch; font-size: clamp(1.35rem, 1.65vw, 2rem); }
-      .event-info { background: #232823; padding: clamp(1rem, 2vw, 1.5rem); border-radius: .5rem; }
+      .event-info { background: #232823; padding: clamp(1.4rem, 2.5vw, 2.25rem); border-radius: .5rem; }
       .teaser .facts { display: flex; gap: .65rem 1.25rem; justify-content: start; }
-      .teaser .facts p { font-size: 1rem; }
+      .teaser .facts p { font-size: clamp(1rem, 1.15vw, 1.2rem); }
+      .teaser .action { font-size: 1.125rem; padding: .9rem 1.25rem; }
       .details-band { flex: 1; display: grid; align-items: center; }
       .details-layout { padding-block: clamp(1.25rem, 2.3vw, 2.5rem); }
       .details-layout h2 { font-size: clamp(1.5rem, 2.35vw, 2.75rem); }
@@ -72,15 +73,24 @@
       .details-layout { grid-template-columns: 1fr; gap: 1rem; padding-block: 1.15rem; }
     }
     @media (max-width: 30rem) {
-      .teaser .hero { text-align: left; padding-block: .55rem 1rem; }
-      .teaser .organizers { margin-bottom: .55rem; }
+      .teaser .hero {
+        display: flex;
+        min-height: calc(100svh - 3.25rem);
+        flex-direction: column;
+        justify-content: space-between;
+        gap: .55rem;
+        text-align: left;
+        padding-block: clamp(.75rem, 4svh, 1.75rem) max(1rem, env(safe-area-inset-bottom));
+      }
+      .teaser .hero > div { display: contents; }
+      .teaser .hero :is(.organizers, h1, .lead, .facts, .booking-note) { margin: 0; }
       .teaser .details-layout h2 { margin-bottom: .65rem; }
-      .teaser .hero .lead { margin-inline: 0; }
       .teaser .facts { justify-content: start; }
       .teaser .action { display: block; }
       .details-layout .brief p { margin-top: .7rem; }
       .media-links li + li { margin-top: .25rem; }
     }
+    .event-info .booking-note { margin: 0 0 .65rem; }
   </style>
 </head>
 <body class="teaser">
@@ -100,8 +110,8 @@
           <p><strong><time datetime="2026-12-07T12:00:00+01:00">7. desember 2026</time></strong><br>Kl. 12.00–15.00</p>
           <p><strong>Storsalen menighet</strong><br>Kommandør T. I. Øgrims plass 4, Oslo</p>
         </div>
-        <a class="action" href="https://event.checkin.no/234241">Meld deg på <span>via Checkin</span></a>
         <p class="booking-note">Sikre deg billett i god tid. Mer programinfo kommer.</p>
+        <a class="action" href="https://event.checkin.no/234241">Meld deg på <span>via Checkin</span></a>
       </div>
     </section>
 
