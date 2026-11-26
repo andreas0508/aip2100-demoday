@@ -80,10 +80,12 @@
         justify-content: space-between;
         gap: .55rem;
         text-align: left;
-        padding-block: clamp(.75rem, 4svh, 1.75rem) max(1rem, env(safe-area-inset-bottom));
+        padding-block: .5rem max(1rem, env(safe-area-inset-bottom));
       }
-      .teaser .hero > div { display: contents; }
+      .teaser .hero > .event-info { display: contents; }
       .teaser .hero :is(.organizers, h1, .lead, .facts, .booking-note) { margin: 0; }
+      .teaser .hero .organizers { margin-bottom: .4rem; }
+      .teaser .hero h1 { margin-bottom: .55rem; }
       .teaser .details-layout h2 { margin-bottom: .65rem; }
       .teaser .facts { justify-content: start; }
       .teaser .action { display: block; }
