@@ -33,6 +33,34 @@
     .media-links li + li { margin-top: .55rem; }
     .media-links a { display: block; padding-block: .2rem; color: var(--ink); }
     .media-links small { display: block; color: var(--muted); font-size: .9rem; }
+    @media (min-width: 56rem) {
+      .teaser .wrap { width: min(calc(100% - 6vw), 94rem); }
+      .teaser .top { min-height: 3.75rem; }
+      .teaser .hero, .details-layout {
+        grid-template-columns: minmax(0, 1.35fr) minmax(16rem, 1fr);
+        gap: clamp(1.75rem, 3.5vw, 3.5rem);
+      }
+      .teaser .hero {
+        display: grid;
+        align-items: center;
+        padding-block: clamp(2.5rem, 5vw, 5.25rem) clamp(2rem, 4vw, 4rem);
+        text-align: left;
+      }
+      .teaser .organizers { margin-bottom: 1rem; }
+      .teaser .hero h1 { font-size: clamp(3.75rem, 6.8vw, 7.5rem); margin-bottom: 1rem; }
+      .teaser .lead { margin: 0; max-width: 39ch; }
+      .event-info { background: #232823; padding: clamp(1rem, 2vw, 1.5rem); border-radius: .5rem; }
+      .teaser .facts { display: flex; gap: .65rem 1.25rem; justify-content: start; }
+      .teaser .facts p { font-size: 1rem; }
+      .details-layout .media { padding-inline: clamp(1rem, 2vw, 1.5rem); }
+      .details-layout .brief p { max-width: 62ch; }
+      .media-links li + li { margin-top: 0; }
+      .media-links li { border-top: 1px solid var(--line); }
+      .media-links li:last-child { border-bottom: 1px solid var(--line); }
+      .media-links a { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .15rem .75rem; padding: .65rem 0; text-decoration: none; }
+      .media-links a:hover span, .media-links a:focus-visible span { text-decoration: underline; }
+      .media-links small { white-space: nowrap; }
+    }
     @media (max-width: 48rem) {
       .details-layout { grid-template-columns: 1fr; }
     }
@@ -55,6 +83,8 @@
         <p class="organizers">NLA Høgskolen &amp; Gokstad Akademiet</p>
         <h1 id="event-title">AI Demo <span>Day</span></h1>
         <p class="lead">Fire uker på å løse konkrete problemer i næringslivet med KI. Se hva studentene bygger.</p>
+      </div>
+      <div class="event-info">
         <div class="facts">
           <p><strong><time datetime="2026-12-07T12:00:00+01:00">7. desember 2026</time></strong><br>Kl. 12.00–15.00</p>
           <p><strong>Storsalen menighet</strong><br>Kommandør T. I. Øgrims plass 4, Oslo</p>
@@ -80,9 +110,9 @@
         <section class="media" aria-labelledby="media-title">
           <h2 id="media-title">Presse og video</h2>
           <ul class="media-links">
-            <li><a href="https://www.kom24.no/ai-aleksander-stensby-artificial-intelligence/dette-laerte-de-av-ki-eksperten-en-oyeapner/970719">Studentene om KI-workshopen<small>KOM24</small></a></li>
-            <li><a href="https://www.vikebladet.no/nyhende/n/ARd1X5/sofie-fraa-hareid-lagar-julebok-til-inntekt-for-frelsesarmeen">Julebok til inntekt for Frelsesarmeen<small>Vikebladet</small></a></li>
-            <li><a href="https://www.linkedin.com/feed/update/urn:li:activity:7460965979779403776/">Videohilsen fra Nicolai Tangen til studenter<small>Våren 2026</small></a></li>
+            <li><a href="https://www.kom24.no/ai-aleksander-stensby-artificial-intelligence/dette-laerte-de-av-ki-eksperten-en-oyeapner/970719"><span>Studentene om KI-workshopen</span><small>KOM24</small></a></li>
+            <li><a href="https://www.vikebladet.no/nyhende/n/ARd1X5/sofie-fraa-hareid-lagar-julebok-til-inntekt-for-frelsesarmeen"><span>Julebok til inntekt for Frelsesarmeen</span><small>Vikebladet</small></a></li>
+            <li><a href="https://www.linkedin.com/feed/update/urn:li:activity:7460965979779403776/"><span>Videohilsen fra Nicolai Tangen til studenter</span><small>Våren 2026</small></a></li>
           </ul>
         </section>
       </div>
