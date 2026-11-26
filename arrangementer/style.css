@@ -69,5 +69,17 @@ h1 { letter-spacing: -.045em; }
 .media article h3 { margin-bottom: .45rem; font-size: 1.3rem; }
 .media article p:not(.organizers) { color: var(--muted); }
 @media (max-width: 44rem) {
-  .event { grid-template-columns: 1fr; }
+  .wrap { width: calc(100% - 2rem); }
+  .top { min-height: 3.25rem; }
+  .top a { display: inline-block; padding-block: .35rem; }
+  .hero { padding-block: 1rem 1.25rem; }
+  .hero h1, .overview h1 { font-size: clamp(2.1rem, 9vw, 3.5rem); }
+  .hero .lead, .overview .lead { font-size: 1.125rem; line-height: 1.45; }
+  .facts { gap: .6rem 1rem; }
+  .action { display: block; text-align: center; }
+  .brief { padding: 1rem; }
+  .media-links li a { display: inline-block; padding-block: .35rem; }
+  .event { grid-template-columns: 1fr; gap: .35rem; padding-block: .85rem; }
+  .event-name { overflow-wrap: anywhere; }
+  .event-link { margin-top: .15rem; }
 }
