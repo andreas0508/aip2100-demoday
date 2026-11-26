@@ -25,7 +25,7 @@
     .teaser .hero h1 { font-size: clamp(2.5rem, 8.5vw, 6.75rem); line-height: .98; margin: 0; }
     .teaser .hero h1 span { display: block; }
     .teaser .lead { max-width: 41ch; color: var(--muted); margin: 1rem auto; }
-    .teaser .facts { justify-content: center; gap: .65rem clamp(1rem, 4vw, 3.5rem); margin: 1rem 0 1.25rem; }
+    .teaser .facts { justify-content: center; gap: .75rem clamp(1.25rem, 3.5vw, 3rem); margin: 1rem 0 1.25rem; }
     .teaser .facts p { font-size: 1rem; }
     .teaser .hero .action { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding-inline: 1.3rem; }
     .details-band { background: #232823; }
@@ -46,20 +46,26 @@
       .teaser .hero { padding-block: clamp(1.6rem, 2.4vw, 2.8rem); }
       .teaser .hero h1 { font-size: clamp(3.5rem, 6vw, 6rem); }
       .teaser .hero h1 span { font-size: .78em; margin-top: .1em; }
-      .teaser .facts { align-items: baseline; }
+      .teaser .facts { align-items: start; }
       .details-band { flex: 1; display: grid; align-items: center; }
     }
     @media (max-width: 48rem) {
       .details-layout { grid-template-columns: 1fr; }
     }
     @media (max-width: 30rem) {
-      .teaser .top { gap: .4rem; font-size: .9rem; }
-      .teaser .hero { padding-block: 1rem 1.25rem; }
+      .teaser .top { gap: .4rem; font-size: .9rem; padding-block: .5rem; }
+      .teaser .hero {
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100svh - 61px);
+        padding-block: clamp(.8rem, 3svh, 1.5rem) max(.85rem, env(safe-area-inset-bottom));
+      }
       .teaser .organizers { font-size: .82rem; margin-bottom: .75rem; }
       .teaser .hero .lead { font-size: 1.05rem; line-height: 1.4; margin: .8rem auto; }
-      .teaser .facts { display: flex; flex-wrap: wrap; gap: .35rem .75rem; margin: .8rem 0 1rem; }
-      .teaser .facts .venue { flex-basis: 100%; }
+      .teaser .event-info { display: flex; flex: 1; flex-direction: column; align-items: center; gap: 1rem; }
+      .teaser .facts { gap: .5rem 1rem; margin: 0; }
       .teaser .facts p { font-size: .94rem; }
+      .teaser .hero .action { margin-top: auto; }
     }
   </style>
 </head>
@@ -77,8 +83,7 @@
       </div>
       <div class="event-info">
         <div class="facts">
-          <p><strong><time datetime="2026-12-07">7. desember 2026</time></strong></p>
-          <p>Kl. <time datetime="12:00">12.00</time>–<time datetime="15:00">15.00</time></p>
+          <p><strong><time datetime="2026-12-07">7. desember 2026</time></strong><br>Kl. <time datetime="12:00">12.00</time>–<time datetime="15:00">15.00</time></p>
           <p class="venue"><strong>Storsalen menighet</strong><br>Kommandør T. I. Øgrims plass 4, Oslo</p>
         </div>
         <a class="action" href="https://event.checkin.no/234241">Meld deg på via Checkin</a>
