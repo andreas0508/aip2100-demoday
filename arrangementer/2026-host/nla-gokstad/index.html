@@ -6,8 +6,19 @@
   <meta name="description" content="AI Demo Day med NLA Høgskolen &amp; Gokstad Akademiet. Se studentenes AI-prosjekter 7. desember 2026 i Storsalen i Oslo.">
   <title>AI Demo Day · NLA Høgskolen &amp; Gokstad Akademiet</title>
   <link rel="stylesheet" href="../../style.css">
+  <style>
+    .teaser .top { border: 0; }
+    .teaser .organizers { color: var(--muted); }
+    .teaser .brief { background: #202420; border: 0; border-radius: .5rem; }
+    .teaser .brief h2, .teaser .media h2 { font-size: clamp(1.35rem, 2.3vw, 2rem); }
+    .teaser .assignment li::marker { color: var(--muted); }
+    .teaser .media { border: 0; }
+    .media-links { margin: 0; padding-left: 1.25rem; }
+    .media-links li { padding-block: .2rem; }
+    .teaser .media-links a { color: var(--ink); }
+  </style>
 </head>
-<body>
+<body class="teaser">
   <header class="wrap top">
     <a class="wordmark" href="#start">AI Demo Day</a>
     <nav aria-label="Hovedmeny"><a href="../../">Alle arrangementer</a></nav>
@@ -16,14 +27,14 @@
     <section class="wrap hero" aria-labelledby="event-title">
       <div>
         <p class="organizers">NLA Høgskolen &amp; Gokstad Akademiet</p>
-        <h1 id="event-title">AI Demo <span>Day</span></h1>
+        <h1 id="event-title">AI Demo Day</h1>
         <p class="lead">Fire uker på å løse konkrete problemer i næringslivet med KI. Se hva studentene bygger.</p>
         <div class="facts">
           <p><strong><time datetime="2026-12-07T12:00:00+01:00">7. desember 2026</time></strong><br>Kl. 12.00–ca. 15.00</p>
           <p><strong>Storsalen menighet</strong><br>Kommandør T. I. Øgrims plass 4, Oslo</p>
         </div>
         <a class="action" href="https://event.checkin.no/234241">Meld deg på <span>via Checkin</span></a>
-        <p class="booking-note">Sikre deg billett i god tid.</p>
+        <p class="booking-note">Sikre deg billett i god tid. Mer programinfo kommer.</p>
       </div>
       <aside class="brief" aria-labelledby="brief-title">
         <h2 id="brief-title">Oppdraget studentene fikk</h2>
@@ -33,40 +44,17 @@
           <li>Bygg en løsning som løser problemet, og test den med dem den er laget for.</li>
         </ol>
         <p>Karl Philip Lund og Andreas Carlsen ga studentene oppdraget før felles kickoff.</p>
+        <p>Prosjektideene spenner fra et KI-kurs om svindel til skrivehjelp og et 3D-kart for renholdere.</p>
       </aside>
     </section>
 
-    <section class="wrap visit" aria-labelledby="visit-title">
-      <h2 id="visit-title">Dette får du se</h2>
-      <div class="visit-grid">
-        <div><h3>Studentprosjekter</h3><p>Blant prosjektideene er et KI-kurs som hjelper eldre å gjenkjenne svindel, skrivehjelp for folk som lærer norsk, og et 3D-kart som skal testes med renholdere.</p></div>
-        <div><h3>Gjesteinnlegg</h3><p>Inviterte gjester bidrar med egne perspektiver. Dagen er åpen for studenter, ansatte i utdanning og deltakere fra næringslivet.</p></div>
-        <div><h3>Billetter</h3><p>Billettvalg og priser finner du i Checkin.</p><a href="https://event.checkin.no/234241">Se billettene</a></div>
-      </div>
-      <p class="program-note">Mer informasjon om programmet og hvilke prosjekter som vises, kommer.</p>
-    </section>
     <section class="wrap visit media" aria-labelledby="media-title">
-      <h2 id="media-title">Studentene i media</h2>
-      <div class="media-grid">
-        <article>
-          <p class="organizers">KOM24 · 24. november 2026</p>
-          <h3>Dette lærte de av KI-eksperten</h3>
-          <p>Studenter fra begge skolene forteller hva de lærte av Aleksander Stensbys workshop om Claude og markedsføring, og hvordan de bruker KI i prosjektene sine.</p>
-          <a href="https://www.kom24.no/ai-aleksander-stensby-artificial-intelligence/dette-laerte-de-av-ki-eksperten-en-oyeapner/970719">Les saken hos KOM24</a>
-        </article>
-        <article>
-          <p class="organizers">Vikebladet Vestposten</p>
-          <h3>Julebok til inntekt for Frelsesarmeen</h3>
-          <p>Sofie Gjerde Tonev og medstudentene samlet juleoppskrifter i en bok der overskuddet går til Frelsesarmeens julegryte.</p>
-          <a href="https://www.vikebladet.no/nyhende/n/ARd1X5/sofie-fraa-hareid-lagar-julebok-til-inntekt-for-frelsesarmeen">Les saken hos Vikebladet</a>
-        </article>
-        <article>
-          <p class="organizers">Video · Våren 2026</p>
-          <h3>Videohilsen fra Nicolai Tangen</h3>
-          <p>Tangen snakker om gapet mellom hva KI-teknologien kan gjøre og hvor mye virksomheter faktisk tar den i bruk. Hilsenen ble laget til studenter våren 2026.</p>
-          <a href="https://www.linkedin.com/feed/update/urn:li:activity:7460965979779403776/">Se videohilsenen på LinkedIn</a>
-        </article>
-      </div>
+      <h2 id="media-title">Presse og video</h2>
+      <ul class="media-links">
+        <li><a href="https://www.kom24.no/ai-aleksander-stensby-artificial-intelligence/dette-laerte-de-av-ki-eksperten-en-oyeapner/970719">Studentene om KI-workshopen</a> · KOM24</li>
+        <li><a href="https://www.vikebladet.no/nyhende/n/ARd1X5/sofie-fraa-hareid-lagar-julebok-til-inntekt-for-frelsesarmeen">Julebok til inntekt for Frelsesarmeen</a> · Vikebladet</li>
+        <li><a href="https://www.linkedin.com/feed/update/urn:li:activity:7460965979779403776/">Videohilsen fra Nicolai Tangen til studenter</a> · Våren 2026</li>
+      </ul>
     </section>
   </main>
   <footer class="wrap top bottom"><span>NLA Høgskolen &amp; Gokstad Akademiet</span><a href="../../">Tidligere arrangementer</a></footer>
