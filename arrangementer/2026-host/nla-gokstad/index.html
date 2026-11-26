@@ -34,16 +34,16 @@
     .media-links a { display: block; padding-block: .2rem; color: var(--ink); }
     .media-links small { display: block; color: var(--muted); font-size: .9rem; }
     @media (min-width: 56rem) {
-      .teaser .wrap { width: min(calc(100% - 6vw), 94rem); }
+      .teaser .wrap { width: min(calc(100% - clamp(2rem, 5vw, 6rem)), 112rem); }
       .teaser .top { min-height: 3.75rem; }
       .teaser .hero, .details-layout {
         grid-template-columns: minmax(0, 1.35fr) minmax(16rem, 1fr);
-        gap: clamp(1.75rem, 3.5vw, 3.5rem);
+        gap: clamp(1.5rem, 2.75vw, 3rem);
       }
       .teaser .hero {
         display: grid;
         align-items: center;
-        padding-block: clamp(2.5rem, 5vw, 5.25rem) clamp(2rem, 4vw, 4rem);
+        padding-block: clamp(1.3rem, 2.2vw, 2.6rem) clamp(1.4rem, 2.4vw, 2.75rem);
         text-align: left;
       }
       .teaser .organizers { margin-bottom: 1rem; }
@@ -52,6 +52,7 @@
       .event-info { background: #232823; padding: clamp(1rem, 2vw, 1.5rem); border-radius: .5rem; }
       .teaser .facts { display: flex; gap: .65rem 1.25rem; justify-content: start; }
       .teaser .facts p { font-size: 1rem; }
+      .details-layout { padding-block: clamp(1.25rem, 1.8vw, 2rem); }
       .details-layout .media { padding-inline: clamp(1rem, 2vw, 1.5rem); }
       .details-layout .brief p { max-width: 62ch; }
       .media-links li + li { margin-top: 0; }
@@ -62,13 +63,17 @@
       .media-links small { white-space: nowrap; }
     }
     @media (max-width: 48rem) {
-      .details-layout { grid-template-columns: 1fr; }
+      .details-layout { grid-template-columns: 1fr; gap: 1rem; padding-block: 1.15rem; }
     }
     @media (max-width: 30rem) {
-      .teaser .hero { text-align: left; }
+      .teaser .hero { text-align: left; padding-block: 1rem 1.25rem; }
+      .teaser .organizers { margin-bottom: .55rem; }
+      .teaser .details-layout h2 { margin-bottom: .65rem; }
       .teaser .hero .lead { margin-inline: 0; }
       .teaser .facts { justify-content: start; }
       .teaser .action { display: block; }
+      .details-layout .brief p { margin-top: .7rem; }
+      .media-links li + li { margin-top: .25rem; }
     }
   </style>
 </head>
